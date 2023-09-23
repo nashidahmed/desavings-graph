@@ -2,12 +2,11 @@ import { SavingsCreated as SavingsCreatedEvent } from "../generated/SavingsFacto
 import { Saving, TokenDistribution } from "../generated/schema"
 
 export function handleSavingsCreated(event: SavingsCreatedEvent): void {
-  let entity = new Saving(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
+  let entity = new Saving(event.params.savings)
   entity.creator = event.params.creator
-  entity.savings = event.params.savings
-  entity.whitelistTokens = event.params.whitelistTokens
+  // event.params.whitelistTokens.forEach((token, x) => {
+  //   entity.whitelistTokens[x] = token
+  // })
 
   for (let x = 0; x < event.params.tokenDistribution.length; x++) {
     let tokenDistribution = new TokenDistribution(

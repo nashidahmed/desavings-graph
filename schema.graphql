@@ -1,14 +1,12 @@
 type Saving @entity(immutable: true) {
+  "Address of the savings contract"
   id: Bytes!
 
   "Creator of the savings contract"
   creator: Bytes!
 
-  "Address of the savings contract"
-  savings: Bytes!
-
-  "Tokens whitelisted by the savings contract"
-  whitelistTokens: [Bytes!]!
+  # "Tokens whitelisted by the savings contract"
+  # whitelistTokens: [Bytes!]!
 
   "Distribution of the output tokens"
   tokenDistribution: [TokenDistribution!]! @derivedFrom(field: "savings")
