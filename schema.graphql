@@ -10,6 +10,9 @@ type Saving @entity(immutable: true) {
 
   "Distribution of the output tokens"
   tokenDistribution: [TokenDistribution!]! @derivedFrom(field: "savings")
+
+  "Transactions made in this savings contract"
+  transactions: [Transaction!] @derivedFrom(field: "savings")
 }
 
 type TokenDistribution @entity(immutable: true) {
@@ -38,10 +41,10 @@ type Transaction @entity(immutable: true) {
   amountIn: BigInt!
 
   "Outgoing tokens along with the amount of tokens"
-  amountsOut: [TokenAmount!]! @derivedFrom(field: "transaction")
+  outgoingTokens: [OutgoingToken!]! @derivedFrom(field: "transaction")
 }
 
-type TokenAmount @entity(immutable: true) {
+type OutgoingToken @entity(immutable: true) {
   id: Bytes!
 
   "Transaction this token amount is associated with"

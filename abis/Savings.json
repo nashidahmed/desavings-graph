@@ -64,10 +64,22 @@
         "type": "uint256"
       },
       {
+        "components": [
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
         "indexed": false,
-        "internalType": "uint256[]",
-        "name": "amountsOut",
-        "type": "uint256[]"
+        "internalType": "struct Savings.OutgoingToken[]",
+        "name": "outgoingTokens",
+        "type": "tuple[]"
       }
     ],
     "name": "ReceivedFunds",

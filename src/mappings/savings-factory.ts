@@ -1,5 +1,5 @@
-import { SavingsCreated as SavingsCreatedEvent } from "../generated/SavingsFactory/SavingsFactory"
-import { Saving, TokenDistribution } from "../generated/schema"
+import { SavingsCreated as SavingsCreatedEvent } from "../../generated/SavingsFactory/SavingsFactory"
+import { Saving, TokenDistribution } from "../../generated/schema"
 
 export function handleSavingsCreated(event: SavingsCreatedEvent): void {
   let entity = new Saving(event.params.savings)

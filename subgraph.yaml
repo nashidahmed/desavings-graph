@@ -6,7 +6,7 @@ dataSources:
     name: SavingsFactory
     network: goerli
     source:
-      address: "0x94De9e2f793Dde63718C28Dfa2333A8dF41Bce7e"
+      address: "0x053ae0EF8ed2e0A6FA42689697B253FA274f0fad"
       abi: SavingsFactory
       startBlock: 9744454
     mapping:
@@ -39,5 +39,5 @@ templates:
         - name: Savings
           file: ./abis/Savings.json
       eventHandlers:
-        - event: ReceivedFunds(indexed address,address,uint256,uint256[])
+        - event: ReceivedFunds(indexed address,address,uint256,(address,uint256)[])
           handler: handleReceivedFunds
