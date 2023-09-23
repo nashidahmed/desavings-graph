@@ -1,0 +1,10 @@
+type SavingsCreated @entity(immutable: true) {
+  id: Bytes!
+  creator: Bytes! # address
+  savings: Bytes! # address
+  whitelistTokens: [Bytes!]! # address[]
+  tokenDistribution: [Bytes!]! # tuple[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

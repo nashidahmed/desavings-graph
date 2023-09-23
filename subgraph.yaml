@@ -1,0 +1,24 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SavingsFactory
+    network: goerli
+    source:
+      address: "0xC755c7D8D5b8a8422Ccc014EFc21F9ac66dFFf29"
+      abi: SavingsFactory
+      startBlock: 9743979
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - SavingsCreated
+      abis:
+        - name: SavingsFactory
+          file: ./abis/SavingsFactory.json
+      eventHandlers:
+        - event: SavingsCreated(indexed address,address,address[],(address,uint256)[])
+          handler: handleSavingsCreated
+      file: ./src/savings-factory.ts
