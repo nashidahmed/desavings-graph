@@ -24,3 +24,32 @@ type TokenDistribution @entity(immutable: true) {
   "Percentage of the incoming token allocated to this token"
   distribution: Int!
 }
+
+type Transaction @entity(immutable: true) {
+  id: Bytes!
+
+  "Savings contract where this transactions occurred"
+  savings: Saving!
+
+  "Incoming token for this transaction"
+  tokenIn: Bytes!
+
+  "Incoming token amount for this transaction"
+  amountIn: BigInt!
+
+  "Outgoing tokens along with the amount of tokens"
+  amountsOut: [TokenAmount!]! @derivedFrom(field: "transaction")
+}
+
+type TokenAmount @entity(immutable: true) {
+  id: Bytes!
+
+  "Transaction this token amount is associated with"
+  transaction: Transaction!
+
+  "Outgoing token associated with this internal transaction"
+  token: Bytes!
+
+  "Outgoing token amount associated with this internal transaction"
+  amount: BigInt!
+}

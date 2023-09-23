@@ -13,12 +13,31 @@ dataSources:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
+      file: ./src/mappings/savings-factory.ts
       entities:
-        - SavingsCreated
+        - Savings
       abis:
         - name: SavingsFactory
           file: ./abis/SavingsFactory.json
       eventHandlers:
         - event: SavingsCreated(indexed address,address,address[],(address,uint8)[])
           handler: handleSavingsCreated
-      file: ./src/savings-factory.ts
+templates:
+  - name: Savings
+    kind: ethereum/contract
+    network: goerli
+    source:
+      abi: Savings
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/savings.ts
+      entities:
+        - Transaction
+      abis:
+        - name: Savings
+          file: ./abis/Savings.json
+      eventHandlers:
+        - event: ReceivedFunds(indexed address,address,uint256,uint256[])
+          handler: handleReceivedFunds
