@@ -19,6 +19,6 @@ dataSources:
         - name: SavingsFactory
           file: ./abis/SavingsFactory.json
       eventHandlers:
-        - event: SavingsCreated(indexed address,address,address[],(address,uint256)[])
+        - event: SavingsCreated(indexed address,address,address[],(address,uint8)[])
           handler: handleSavingsCreated
       file: ./src/savings-factory.ts

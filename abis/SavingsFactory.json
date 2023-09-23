@@ -33,8 +33,16 @@
       },
       {
         "components": [
-          { "internalType": "address", "name": "token", "type": "address" },
-          { "internalType": "uint256", "name": "amount", "type": "uint256" }
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint8",
+            "name": "distribution",
+            "type": "uint8"
+          }
         ],
         "indexed": false,
         "internalType": "struct Savings.TokenDistribution[]",
@@ -54,14 +62,26 @@
       },
       {
         "components": [
-          { "internalType": "address", "name": "token", "type": "address" },
-          { "internalType": "uint256", "name": "amount", "type": "uint256" }
+          {
+            "internalType": "address",
+            "name": "token",
+            "type": "address"
+          },
+          {
+            "internalType": "uint8",
+            "name": "distribution",
+            "type": "uint8"
+          }
         ],
         "internalType": "struct Savings.TokenDistribution[]",
         "name": "_tokenDistribution",
         "type": "tuple[]"
       },
-      { "internalType": "uint96", "name": "amount", "type": "uint96" }
+      {
+        "internalType": "uint96",
+        "name": "amount",
+        "type": "uint96"
+      }
     ],
     "name": "create",
     "outputs": [],
@@ -84,7 +104,13 @@
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },

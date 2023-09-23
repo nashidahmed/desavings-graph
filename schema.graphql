@@ -1,10 +1,28 @@
-type SavingsCreated @entity(immutable: true) {
+type Saving @entity(immutable: true) {
   id: Bytes!
-  creator: Bytes! # address
-  savings: Bytes! # address
-  whitelistTokens: [Bytes!]! # address[]
-  tokenDistribution: [Bytes!]! # tuple[]
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+
+  "Creator of the savings contract"
+  creator: Bytes!
+
+  "Address of the savings contract"
+  savings: Bytes!
+
+  "Tokens whitelisted by the savings contract"
+  whitelistTokens: [Bytes!]!
+
+  "Distribution of the output tokens"
+  tokenDistribution: [TokenDistribution!]! @derivedFrom(field: "savings")
+}
+
+type TokenDistribution @entity(immutable: true) {
+  id: Bytes!
+
+  "Address of the savings contract"
+  savings: Saving!
+
+  "Address of the token"
+  token: Bytes!
+
+  "Percentage of the incoming token allocated to this token"
+  distribution: Int!
 }
