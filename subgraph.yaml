@@ -6,9 +6,9 @@ dataSources:
     name: SavingsFactory
     network: goerli
     source:
-      address: "0x053ae0EF8ed2e0A6FA42689697B253FA274f0fad"
+      address: "0x2e4E26C7df619ee29204B65327E781506f918a2A"
       abi: SavingsFactory
-      startBlock: 9744454
+      startBlock: 9748258
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -34,7 +34,7 @@ templates:
       language: wasm/assemblyscript
       file: ./src/mappings/savings.ts
       entities:
-        - Transaction
+        - Transactions
       abis:
         - name: Savings
           file: ./abis/Savings.json

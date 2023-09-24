@@ -10,7 +10,9 @@ export function handleReceivedFunds(event: ReceivedFundsEvent): void {
   transaction.amountIn = event.params.amountIn
 
   for (let x = 0; x < event.params.outgoingTokens.length; x++) {
-    let outgoingToken = new OutgoingToken(event.transaction.hash.concatI32(x))
+    let outgoingToken = new OutgoingToken(
+      event.transaction.hash.concatI32(event.logIndex.toI32()).concatI32(x)
+    )
     outgoingToken.transaction = event.transaction.hash.concatI32(
       event.logIndex.toI32()
     )

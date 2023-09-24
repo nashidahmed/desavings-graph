@@ -1,9 +1,11 @@
 import { SavingsCreated as SavingsCreatedEvent } from "../../generated/SavingsFactory/SavingsFactory"
 import { Saving, TokenDistribution } from "../../generated/schema"
+import { Savings as SavingsTemplate } from "../../generated/templates"
 
 export function handleSavingsCreated(event: SavingsCreatedEvent): void {
-  let entity = new Saving(event.params.savings)
-  entity.creator = event.params.creator
+  SavingsTemplate.create(event.params.savings)
+  let saving = new Saving(event.params.savings)
+  saving.creator = event.params.creator
   // event.params.whitelistTokens.forEach((token, x) => {
   //   entity.whitelistTokens[x] = token
   // })
@@ -19,5 +21,5 @@ export function handleSavingsCreated(event: SavingsCreatedEvent): void {
     tokenDistribution.save()
   }
 
-  entity.save()
+  saving.save()
 }
