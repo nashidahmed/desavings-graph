@@ -6,19 +6,38 @@ dataSources:
     name: SavingsFactory
     network: goerli
     source:
-      address: "0xC755c7D8D5b8a8422Ccc014EFc21F9ac66dFFf29"
+      address: "0x2d91cE9E8D2Cc683b9Cb7ac59a6A688FEB8D66B9"
       abi: SavingsFactory
-      startBlock: 9743979
+      startBlock: 9749985
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
+      file: ./src/mappings/savings-factory.ts
       entities:
-        - SavingsCreated
+        - Savings
       abis:
         - name: SavingsFactory
           file: ./abis/SavingsFactory.json
       eventHandlers:
-        - event: SavingsCreated(indexed address,address,address[],(address,uint256)[])
+        - event: SavingsCreated(indexed address,address,address[],(address,uint8)[])
           handler: handleSavingsCreated
-      file: ./src/savings-factory.ts
+templates:
+  - name: Savings
+    kind: ethereum/contract
+    network: goerli
+    source:
+      abi: Savings
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/savings.ts
+      entities:
+        - Transactions
+      abis:
+        - name: Savings
+          file: ./abis/Savings.json
+      eventHandlers:
+        - event: ReceivedFunds(indexed address,address,uint256,(address,uint256)[])
+          handler: handleReceivedFunds
