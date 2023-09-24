@@ -1,10 +1,58 @@
-type SavingsCreated @entity(immutable: true) {
+type Saving @entity(immutable: true) {
+  "Address of the savings contract"
   id: Bytes!
-  creator: Bytes! # address
-  savings: Bytes! # address
-  whitelistTokens: [Bytes!]! # address[]
-  tokenDistribution: [Bytes!]! # tuple[]
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
+
+  "Creator of the savings contract"
+  creator: Bytes!
+
+  # "Tokens whitelisted by the savings contract"
+  # whitelistTokens: [Bytes!]!
+
+  "Distribution of the output tokens"
+  tokenDistribution: [TokenDistribution!]! @derivedFrom(field: "savings")
+
+  "Transactions made in this savings contract"
+  transactions: [Transaction!] @derivedFrom(field: "savings")
+}
+
+type TokenDistribution @entity(immutable: true) {
+  id: Bytes!
+
+  "Address of the savings contract"
+  savings: Saving!
+
+  "Address of the token"
+  token: Bytes!
+
+  "Percentage of the incoming token allocated to this token"
+  distribution: Int!
+}
+
+type Transaction @entity(immutable: true) {
+  id: Bytes!
+
+  "Savings contract where this transactions occurred"
+  savings: Saving!
+
+  "Incoming token for this transaction"
+  tokenIn: Bytes!
+
+  "Incoming token amount for this transaction"
+  amountIn: BigInt!
+
+  "Outgoing tokens along with the amount of tokens"
+  outgoingTokens: [OutgoingToken!]! @derivedFrom(field: "transaction")
+}
+
+type OutgoingToken @entity(immutable: true) {
+  id: Bytes!
+
+  "Transaction this token amount is associated with"
+  transaction: Transaction!
+
+  "Outgoing token associated with this internal transaction"
+  token: Bytes!
+
+  "Outgoing token amount associated with this internal transaction"
+  amount: BigInt!
 }
